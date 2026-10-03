@@ -20,6 +20,6 @@ type AttackEvent struct {
  SynRatio float64 `json:"syn_ratio"`; Interfaces []string `json:"interfaces"`
 }
 type Snapshot struct {
- Time time.Time `json:"time"`; HostID string `json:"host_id"`; Attack bool `json:"attack"`; System SystemStats `json:"system""
+ Time time.Time `json:"time"`; HostID string `json:"host_id"`; Attack bool `json:"attack"`; System SystemStats `json:"system"`
  Interfaces []InterfaceStats `json:"interfaces"`; Network PacketStats `json:"network"`; Events []AttackEvent `json:"events,omitempty"`
 }
