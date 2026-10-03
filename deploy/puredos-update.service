@@ -1,0 +1,10 @@
+[Unit]
+Description=Update PureAntiDDoS from GitHub
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+ExecStart=/usr/local/sbin/puredos-update
+TimeoutStartSec=5min
