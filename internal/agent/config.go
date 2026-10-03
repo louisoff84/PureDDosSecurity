@@ -13,6 +13,8 @@ type Config struct {
  AlertSYNRatio float64
  AlertUniqueSrc int
  PacketSnapLen int
+ APIAuthToken string
+ CORSOrigin string
 }
 func LoadConfig() Config { return Config{
  ListenAddr:env("PUREDDOS_LISTEN","0.0.0.0:2456"),
@@ -26,6 +28,8 @@ func LoadConfig() Config { return Config{
  AlertSYNRatio:envFloat("PUREDDOS_ALERT_SYN_RATIO",0.70),
  AlertUniqueSrc:envInt("PUREDDOS_ALERT_UNIQUE_SRC",500),
  PacketSnapLen:128,
+ APIAuthToken:os.Getenv("PUREDDOS_API_TOKEN"),
+ CORSOrigin:os.Getenv("PUREDDOS_CORS_ORIGIN"),
 }}
 func env(k,d string)string{if v:=os.Getenv(k);v!=""{return v};return d}
 func envDuration(k string,d time.Duration)time.Duration{if v:=os.Getenv(k);v!=""{if x,e:=time.ParseDuration(v);e==nil{return x}};return d}
