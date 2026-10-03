@@ -24,6 +24,8 @@ GET /api/v1/status
 GET /api/v1/events
 GET /api/v1/metrics
 
+If PUREDDOS_API_TOKEN is set, send Authorization: Bearer <token>. Set PUREDDOS_CORS_ORIGIN for browser dashboards hosted on another origin.
+
 The status response contains the current attack flag, interface telemetry, system telemetry and network indicators.
 
 ## Central collector
