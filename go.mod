@@ -1,6 +1,6 @@
 module github.com/louisoff84/PureDDosSecurity
 
-go 1.23
+go 1.24.0
 
 require (
 	github.com/google/gopacket v1.1.19
