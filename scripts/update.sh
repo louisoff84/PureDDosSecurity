@@ -37,7 +37,7 @@ OLD="$LOCAL"
 log "Updating $(printf '%s' "$OLD" | cut -c1-12) -> $(printf '%s' "$REMOTE" | cut -c1-12)"
 git reset --hard "origin/$BRANCH"
 
-go mod download
+go mod tidy
 
 TMP_BIN="$(mktemp /tmp/puredos.XXXXXX)"
 trap "rm -f '$TMP_BIN'" EXIT
