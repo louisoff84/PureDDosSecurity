@@ -6,7 +6,29 @@ REPO_URL="https://github.com/louisoff84/PureDDosSecurity.git"
 REPO_DIR="/opt/PureAntiDDoS"
 
 apt-get update
-apt-get install -y ca-certificates build-essential libpcap-dev golang git
+apt-get install -y ca-certificates build-essential libpcap-dev git curl tar
+GO_VERSION="1.27.0"
+
+install_go() {
+  local arch
+  case "$(uname -m)" in
+    x86_64|amd64) arch="amd64" ;;
+    aarch64|arm64) arch="arm64" ;;
+    armv6l|armv7l) arch="armv6l" ;;
+    *) echo "Unsupported architecture: $(uname -m)"; exit 1 ;;
+  esac
+  curl -fsSL "https://go.dev/dl/go${GO_VERSION}.linux-${arch}.tar.gz" -o /tmp/go.tar.gz
+  rm -rf /usr/local/go
+  tar -C /usr/local -xzf /tmp/go.tar.gz
+  rm -f /tmp/go.tar.gz
+}
+
+if ! command -v go >/dev/null 2>&1 || [[ "$(go env GOVERSION 2>/dev/null || true)" < "go1.24" ]]; then
+  install_go
+fi
+export PATH="/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
+go version
+
 install -d /etc/puredos /var/lib/puredos
 
 if [[ ! -d "$REPO_DIR/.git" ]]; then
