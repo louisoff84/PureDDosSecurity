@@ -7,7 +7,7 @@ type InterfaceStats struct {
 }
 type SystemStats struct {
  CPUPercent float64 `json:"cpu_percent"`; MemoryPercent float64 `json:"memory_percent"`; MemoryUsed uint64 `json:"memory_used"`; MemoryTotal uint64 `json:"memory_total"`
- Load1 float64 `json:"load1"`; Load5 float64 `json:"load5"`; Load15 float64 `json:"load15"`; Goroutines int `json:"goroutines"`; UptimeSeconds uint64 `json:"uptime_seconds"`
+ Load1 float64 `json:"load1"`; Load5 float64 `json:"load5"`; Load15 float64 `json:"load15"`; Goroutines int `json:"goroutines"`; UptimeSeconds uint64 `json:"uptime_seconds"`; DiskUsedPercent float64 `json:"disk_used_percent"`; Processes uint64 `json:"processes"`
 }
 type PacketStats struct {
  PacketsPerSecond float64 `json:"packets_per_second"`; BitsPerSecond float64 `json:"bits_per_second"`; SynPerSecond float64 `json:"syn_per_second"`
