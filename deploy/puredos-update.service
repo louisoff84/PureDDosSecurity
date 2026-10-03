@@ -7,5 +7,6 @@ Wants=network-online.target
 Type=oneshot
 User=root
 EnvironmentFile=-/etc/puredos/puredos.env
+Environment="PATH=/usr/local/go/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin"
 ExecStart=/usr/local/sbin/puredos-update
 TimeoutStartSec=5min
