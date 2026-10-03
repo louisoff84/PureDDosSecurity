@@ -40,7 +40,7 @@ git reset --hard "origin/$BRANCH"
 go mod download
 
 TMP_BIN="$(mktemp /tmp/puredos.XXXXXX)"
-trap 'rm -f "$TMP_BIN"' EXIT
+trap "rm -f '$TMP_BIN'" EXIT
 
 if ! CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o "$TMP_BIN" ./cmd/puredos; then
   log "Build failed; keeping the current binary."
@@ -49,6 +49,14 @@ if ! CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o "$TMP_BIN" ./cmd/pured
 fi
 
 install -m 0755 "$TMP_BIN" "$BIN"
+
+# Keep the updater and systemd units in sync with the GitHub revision.
+install -m 0755 scripts/update.sh /usr/local/sbin/puredos-update
+install -m 0644 deploy/puredos.service /etc/systemd/system/puredos.service
+install -m 0644 deploy/puredos-update.service /etc/systemd/system/puredos-update.service
+install -m 0644 deploy/puredos-update.timer /etc/systemd/system/puredos-update.timer
+systemctl daemon-reload
 systemctl restart "$SERVICE"
+systemctl restart puredos-update.timer
 
 log "Updated PureAntiDDoS to $(git rev-parse --short=12 HEAD)"
