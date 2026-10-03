@@ -1,0 +1,22 @@
+[Unit]
+Description=PureDDosSecurity DDoS detection agent
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=simple
+User=root
+Group=root
+EnvironmentFile=/etc/puredos/puredos.env
+ExecStart=/usr/local/bin/puredos
+Restart=always
+RestartSec=2
+PrivateTmp=true
+ProtectSystem=strict
+ProtectHome=true
+ReadWritePaths=/var/lib/puredos
+CapabilityBoundingSet=CAP_NET_RAW CAP_NET_ADMIN
+AmbientCapabilities=CAP_NET_RAW CAP_NET_ADMIN
+
+[Install]
+WantedBy=multi-user.target
