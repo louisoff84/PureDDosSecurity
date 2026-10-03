@@ -20,7 +20,7 @@ if [[ ! -f /etc/puredos/puredos.env ]]; then
   cp configs/puredos.env.example /etc/puredos/puredos.env
 fi
 
-go mod download
+go mod tidy
 CGO_ENABLED=1 go build -trimpath -ldflags="-s -w" -o /usr/local/bin/puredos ./cmd/puredos
 
 install -m 0755 scripts/update.sh /usr/local/sbin/puredos-update
