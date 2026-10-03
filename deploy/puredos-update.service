@@ -6,5 +6,6 @@ Wants=network-online.target
 [Service]
 Type=oneshot
 User=root
+EnvironmentFile=-/etc/puredos/puredos.env
 ExecStart=/usr/local/sbin/puredos-update
 TimeoutStartSec=5min
